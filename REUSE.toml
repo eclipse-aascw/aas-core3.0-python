@@ -1,0 +1,37 @@
+# SPDX-FileCopyrightText: 2023 aas-core3.0-python AUTHORS
+#
+# SPDX-License-Identifier: MIT
+
+version = 1
+
+# Prose and metadata where a header would end up in the rendered output
+# (e.g., README shown on PyPI, the documentation) or which can not carry
+# a comment.
+[[annotations]]
+path = [
+    "AUTHORS",
+    "README.rst",
+    "docs/**/*.rst",
+    "docs/**/*.md",
+    "aas_core3/py.typed",
+    ".idea/**",
+]
+precedence = "aggregate"
+SPDX-FileCopyrightText = "2023 aas-core3.0-python AUTHORS"
+SPDX-License-Identifier = "MIT"
+
+# The snippets are inserted verbatim into the generated code by aas-core-codegen,
+# so they must not carry a header of their own.
+[[annotations]]
+path = "dev_scripts/codegen/snippets/**"
+precedence = "aggregate"
+SPDX-FileCopyrightText = "2023 aas-core3.0-python AUTHORS"
+SPDX-License-Identifier = "MIT"
+
+# Test data and the recorded test outputs are generated and compared
+# byte-by-byte, and JSON can not carry a comment.
+[[annotations]]
+path = ["test_data/**", "tests/testgen_rev.txt"]
+precedence = "aggregate"
+SPDX-FileCopyrightText = "2023 aas-core3.0-python AUTHORS"
+SPDX-License-Identifier = "MIT"

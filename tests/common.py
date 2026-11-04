@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2023 aas-core3.0-python AUTHORS
+#
+# SPDX-License-Identifier: MIT
+
 """Provide functionality used across the tests."""
 
 import base64

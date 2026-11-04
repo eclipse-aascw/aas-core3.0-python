@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2023 aas-core3.0-python AUTHORS
+#
+# SPDX-License-Identifier: MIT
+
 """Download the meta-model to this directory."""
 
 import pathlib
@@ -14,6 +18,19 @@ OWNER = "aas-core-works"
 REPO = "aas-core-meta"
 REF = "main"
 FILEPATH = "aas_core_meta/v3.py"
+
+# NOTE (aaronzi, 2026-11-04):
+# The meta-model is copied verbatim from aas-core-meta, so we attribute it to
+# its authors. The upstream file does not carry a license header itself.
+#
+# REUSE-IgnoreStart
+_META_MODEL_LICENSE_HEADER = """\
+# SPDX-FileCopyrightText: 2024 aas-core-meta AUTHORS
+#
+# SPDX-License-Identifier: MIT
+
+"""
+# REUSE-IgnoreEnd
 
 
 def _latest_commit_sha_for_path(
@@ -86,7 +103,10 @@ def main() -> int:
 
     out_path = this_dir / "meta_model.py"
     # Overwrite unconditionally.
-    out_path.write_text(f"{banner}{content.rstrip()}\n\n{banner}", encoding="utf-8")
+    out_path.write_text(
+        f"{_META_MODEL_LICENSE_HEADER}{banner}{content.rstrip()}\n\n{banner}",
+        encoding="utf-8",
+    )
 
     print(f"Wrote {out_path} (from commit {sha[:12]}).")
     return 0

@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2023 aas-core3.0-python AUTHORS
+#
+# SPDX-License-Identifier: MIT
+
 sphinx==5.3.0
 sphinx-autodoc-typehints==1.19.4
 sphinx-rtd-theme==1.0.0

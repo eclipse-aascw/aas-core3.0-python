@@ -1,5 +1,9 @@
 #!/usr/bin/env python3
 
+# SPDX-FileCopyrightText: 2023 aas-core3.0-python AUTHORS
+#
+# SPDX-License-Identifier: MIT
+
 """Run pre-commit checks on the repository."""
 import argparse
 import enum
@@ -23,6 +27,7 @@ class Step(enum.Enum):
     TEST = "test"
     DOCTEST = "doctest"
     CHECK_INIT_AND_SETUP_COINCIDE = "check-init-and-setup-coincide"
+    REUSE = "reuse"
 
 
 def call_and_report(
@@ -263,6 +268,18 @@ def main() -> int:
             return 1
     else:
         print("Skipped checking that aas_core3/__init__.py and setup.py coincide.")
+
+    if Step.REUSE in selects and Step.REUSE not in skips:
+        print("Checking the REUSE compliance...")
+        exit_code = call_and_report(
+            verb="check the REUSE compliance",
+            cmd=[sys.executable, "-m", "reuse", "lint"],
+            cwd=repo_root,
+        )
+        if exit_code != 0:
+            return 1
+    else:
+        print("Skipped checking the REUSE compliance.")
 
     return 0
 
