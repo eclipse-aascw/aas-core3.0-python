@@ -21,7 +21,12 @@ FILEPATH = "aas_core_meta/v3.py"
 
 # NOTE (aaronzi, 2026-11-04):
 # The meta-model is copied verbatim from aas-core-meta, so we attribute it to
-# its authors. The upstream file does not carry a license header itself.
+# its authors.
+#
+# NOTE (aaronzi, 2026-11-05):
+# Older upstream revisions do not carry a license header, so we prepend it only
+# if the downloaded file has none yet. Otherwise, the header would appear twice
+# once upstream ships it.
 #
 # REUSE-IgnoreStart
 _META_MODEL_LICENSE_HEADER = """\
@@ -30,6 +35,8 @@ _META_MODEL_LICENSE_HEADER = """\
 # SPDX-License-Identifier: MIT
 
 """
+
+_SPDX_LICENSE_IDENTIFIER_TAG = "SPDX-License-Identifier:"
 # REUSE-IgnoreEnd
 
 
@@ -103,8 +110,11 @@ def main() -> int:
 
     out_path = this_dir / "meta_model.py"
     # Overwrite unconditionally.
+    header = (
+        "" if _SPDX_LICENSE_IDENTIFIER_TAG in content else _META_MODEL_LICENSE_HEADER
+    )
     out_path.write_text(
-        f"{_META_MODEL_LICENSE_HEADER}{banner}{content.rstrip()}\n\n{banner}",
+        f"{header}{banner}{content.rstrip()}\n\n{banner}",
         encoding="utf-8",
     )
 
